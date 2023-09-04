@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 // First line: 'C is fun'
 console.log('C is fun');
 
