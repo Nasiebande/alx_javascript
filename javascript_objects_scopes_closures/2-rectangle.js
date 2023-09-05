@@ -6,9 +6,8 @@ class Rectangle {
       this.width = w;
       this.height = h;
     } else {
-      // Create an empty object if w or h is 0 or not a positive integer
-      this.width = undefined;
-      this.height = undefined;
+      // Create an empty object
+      return {};
     }
   }
 }
