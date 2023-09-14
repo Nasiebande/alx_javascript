@@ -1,39 +1,29 @@
 #!/usr/bin/node
 
+// Import the 'request' module for making HTTP requests
 const request = require('request');
 
-// Check if the user provided the API URL as the first argument
-const apiUrl = process.argv[2];
+// Send a GET request to the API URL provided as the first command-line argument (argv[2])
+request(process.argv[2], function (error, response, body) {
+    // Check if there was no error in the request
+    if (!error) {
+        // Parse the JSON response from the API
+        const todos = JSON.parse(body);
 
-if (!apiUrl) {
-  console.error('Please provide the API URL as the first argument.');
-  process.exit(1);
-}
+        // Create an object 'completed' to store the count of completed tasks by user ID
+        const completed = {};
 
-// Perform a GET request to the API URL
-request.get(apiUrl, (error, response, body) => {
-  if (error) {
-    console.error('Error:', error);
-    process.exit(1);
-  }
+        // Loop through each 'todo' in the response
+        todos.forEach((todo) => {
+            // Check if the task is completed and if the user ID is not already in 'completed'
+            if (todo.completed && completed[todo.userId] === undefined) {
+                completed[todo.userId] = 1; // Initialize count to 1
+            } else if (todo.completed) {
+                completed[todo.userId] += 1; // Increment the count for the user ID
+            }
+        });
 
-  // Parse the JSON response from the API
-  const todos = JSON.parse(body);
-
-  // Create an object to store the counts of completed tasks by user ID
-  const completedTasksByUser = {};
-
-  // Loop through the todos and count completed tasks for each user
-  todos.forEach((todo) => {
-    if (todo.completed) {
-      if (completedTasksByUser[todo.userId]) {
-        completedTasksByUser[todo.userId]++;
-      } else {
-        completedTasksByUser[todo.userId] = 1;
-      }
+        // Print the 'completed' object, which contains the count of completed tasks by user ID
+        console.log(completed);
     }
-  });
-
-  // Print the completed tasks by user ID
-  console.log(JSON.stringify(completedTasksByUser, null, 2));
 });
