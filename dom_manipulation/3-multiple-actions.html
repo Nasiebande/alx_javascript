@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- This script creats, appends, and removes elements -->
+<head>
+    <title>Creating and Removing Elements</title>
+</head>
+<body>
+    <div id="container"></div>
+    <button id="toggleButton">Toggle Paragraph</button>
+    <script>
+        window.onload = function () {
+            var container = document.getElementById("container");
+            var paragraph = document.createElement("p");
+            paragraph.textContent = "New paragraph";
+            container.appendChild(paragraph);
+            var toggleButton = document.getElementById("toggleButton");
+            toggleButton.addEventListener("click", function () {
+                if (paragraph.style.display === "none") {
+                    paragraph.style.display = "block";
+                } else {
+                    paragraph.style.display = "none";
+                }
+            });
+        };
+    </script>
+</body>
+</html>
