@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validation</title>
+    <style>
+      .error {
+        border: 2px solid rgb(76, 6, 6);
+      }
+    </style>
+</head>
+
+<body>
+    <form id="emailForm" novalidate>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <button type="submit">Submit</button>
+        <p id="error" style="color: rgb(75, 8, 8);"></p>
+    </form>
+
+    <script src="1-email-validation.js"></script>
+</body>
+
+</html>
